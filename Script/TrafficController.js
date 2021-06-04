@@ -16,22 +16,19 @@ mainApp.controller("TrafficController", function ($scope, $http) {
         date.getHours(),
         date.getMinutes());
 
-    // $http.get("https://api.data.gov.sg/v1/transport/traffic-images")
-    //     .then(function (response) {
-    //         $scope.cameraList = response.data.items[0].cameras;
-    //     });
-
     $scope.queryLocation = function () {
         var dateString = dateFormat($scope.aDate, "yyyy-mm-dd");
         var timestring = "T" + dateFormat($scope.aTime, "HH:MM:ss");
         var selectedDate = dateString + timestring;
 
+        //get camera data by datetime
         $http.get("https://api.data.gov.sg/v1/transport/traffic-images", {
             params: { date_time: selectedDate }
         }).then(function (response) {
             $scope.cameraList = response.data.items[0].cameras;
         });
 
+        //get weather data by datetime
         $http.get("https://api.data.gov.sg/v1/environment/2-hour-weather-forecast", {
             params: { date_time: selectedDate }
         }).then(function (response) {
@@ -41,25 +38,25 @@ mainApp.controller("TrafficController", function ($scope, $http) {
         });
     }
 
+    //trigger when location is selected 
     $scope.locSelected = function (loc) {
         var parsedLoc = JSON.parse(loc);
         var cameraData = $scope.cameraList.filter(value => {
             return (value.location.latitude == parsedLoc.latitude &&
                 value.location.longitude == parsedLoc.longitude)
         })
-        //console.log(filteredData[0].image);
+        //displaying image
         var container = document.getElementById("screenShot")
         container.innerHTML = "";
         var screenShot = document.createElement("img")
         screenShot.src = cameraData[0].image;
         container.appendChild(screenShot);
-
+        //calculating closest area by coordinates
         $scope.areaName = getNearestAreaName($scope.areaList, parsedLoc)
-        
+        //filter weather info by nearest area
         var weatherData = $scope.weatherList.filter(value => {
             return value.area == $scope.areaName
         })
-        // console.log(weatherData);
 
         $scope.aWeather = weatherData[0].forecast;
 
@@ -76,7 +73,6 @@ mainApp.controller("TrafficController", function ($scope, $http) {
                 areaName = areaList[i].name;
             }
         }
-        // console.log(closest)
         return areaName;
     }
 
