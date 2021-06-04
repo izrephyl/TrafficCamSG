@@ -1,0 +1,55 @@
+:root {
+    --primary: #dde7f1;
+    --secondary: #ffffff;
+}
+
+body{
+    width:100%;
+    padding:20px;
+
+}
+
+.formCls label{
+    width:5rem;
+}
+
+.formCls input{
+    width:100%;
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+    border-radius: 5px;
+}
+
+.formCls select{
+    width:100%;
+    border-left: 2px solid black;
+    border-top: 2px solid black;
+    border-radius: 5px;
+}
+
+.formCls button{
+    width:100%;
+    background-color: var(--primary);
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    border-radius: 5px;
+}
+
+.weatherCls{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--primary)
+}
+
+img{
+    width:100%;
+    border:2px solid black;
+}
+
+.redborder{
+    border:1px solid transparent;
+}
+
+.blueborder{
+    border:1px solid blue;
+}

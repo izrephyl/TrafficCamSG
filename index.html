@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <script src="Script/angular.min.js"></script>
+    <script src="Script/date.format.js"></script>
+    <script src="Script/mainApp.js"></script>
+    <script src="Script/TrafficController.js"></script>
+    <script src="bootstrap5/js/bootstrap.min.js"></script>
+    <link href="bootstrap5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="Css/Style.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+    <div ng-app="mainApp" ng-controller="TrafficController">
+        <div class="row pt-2 ">
+            <div class="col-lg-3 formCls ">
+                <label for="aDate">Date:</label>
+                <input type="date" id="aDate" ng-model="aDate">
+            </div>
+            <div class="col-lg-3 formCls ">
+                <label for="aTime">Time:</label>
+                <input type="time" id="aTime" ng-model="aTime">
+            </div>
+        </div>
+        <div class="row pt-2 ">
+            <div class="col-lg-6 formCls pt-2">
+                <button ng-click="queryLocation()">Query</button>
+            </div>
+        </div>
+        <div class="row pt-2">
+            <div class="col-lg-6 formCls pt-2">
+                <label for="aLocation">Location:</label>
+
+                <select ng-model="selectedLoc" ng-change="locSelected(selectedLoc)">
+                    <option ng-repeat="x in cameraList  | orderBy:'location.latitude'" value="{{x.location}}">
+                        {{x.location.latitude}} , {{x.location.latitude}}</option>
+                </select>
+            </div>
+            <div ng-if="areaName" class="col-lg-2 pt-2">
+                <div class="weatherCls p-2">
+                    <label ng-model="areaName">Area: {{areaName}}</label>
+                    <label ng-model="aWeather">Forecast: {{aWeather}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-2">
+            <div class="col-lg-6 formCls ">
+                <div id="screenShot"></div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
