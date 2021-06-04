@@ -2,10 +2,12 @@
 Web Application for Traffic camera and Weather forecast
 
 Deployment
+
 Deploy folder as application
 index.html will be the main file.
 
 Framework used
+
 AngularJS with bootstrap
 
 Mobile View
